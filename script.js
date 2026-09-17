@@ -70,4 +70,32 @@ function mostraAlternativas() {
     for (const alternativa of perguntaAtual.alternativas) {
         const botaoAlternativas = document.createElement("button");
 
-        botao
+        botaoAlternativas.textContent = alternativa.texto;
+
+        botaoAlternativas.addEventListener("click", () => {
+            respostaSelecionada(alternativa);
+        });
+
+        caixaAlternativas.appendChild(botaoAlternativas);
+    }
+}
+
+function respostaSelecionada(opcaoSelecionada) {
+    const afirmacao = opcaoSelecionada.afirmacao;
+
+    historiaFinal += afirmacao + " ";
+
+    atual++;
+
+    mostraPergunta();
+}
+
+function mostraResultado() {
+    caixaPerguntas.textContent = "Descubra o seu perfil de viajante:";
+
+    textoResultado.textContent = historiaFinal;
+
+    caixaAlternativas.textContent = "";
+}
+
+mostraPergunta();
