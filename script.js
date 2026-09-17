@@ -1,52 +1,54 @@
 const caixaPerguntas = document.querySelector(".caixa-perguntas");
 const caixaAlternativas = document.querySelector(".caixa-alternativas");
+const caixaResultado = document.querySelector(".caixa-resultado");
 const textoResultado = document.querySelector(".texto-resultado");
+const barraProgresso = document.querySelector(".barra-progresso");
 
 const perguntas = [
     {
-        enunciado: "Qual estilo de viagem mais combina com você?",
+        enunciado: "Qual deve ser uma das principais prioridades no desenvolvimento da IA?",
         alternativas: [
             {
-                texto: "Explorar a natureza e conhecer paisagens naturais.",
+                texto: "Garantir que a inteligência artificial seja segura e utilizada de forma responsável.",
                 afirmacao:
-                    "Você valoriza o contato com a natureza e prefere experiências tranquilas, cercadas por belas paisagens."
+                    "Você valoriza a segurança, a responsabilidade e o uso consciente da inteligência artificial."
             },
             {
-                texto: "Explorar novos destinos e viver grandes aventuras.",
+                texto: "Acelerar o desenvolvimento para criar novas tecnologias e soluções.",
                 afirmacao:
-                    "Você gosta de aventura, de descobrir novos destinos e de viver experiências marcantes."
+                    "Você valoriza a inovação e acredita que o desenvolvimento tecnológico pode criar novas possibilidades para a sociedade."
             }
         ]
     },
 
     {
-        enunciado: "Qual atividade você escolheria durante uma viagem?",
+        enunciado: "Como a inteligência artificial pode contribuir para a sociedade?",
         alternativas: [
             {
-                texto: "Fazer trilhas e conhecer lugares naturais.",
+                texto: "Ajudando em áreas como educação, saúde, ciência e acessibilidade.",
                 afirmacao:
-                    "Você aprecia atividades ao ar livre e gosta de conhecer ambientes naturais."
+                    "Você vê a IA como uma ferramenta que pode contribuir para melhorar serviços e ampliar oportunidades."
             },
             {
-                texto: "Praticar esportes e atividades de aventura.",
+                texto: "Automatizando tarefas e aumentando a produtividade das pessoas e empresas.",
                 afirmacao:
-                    "Você procura desafios, emoção e experiências diferentes durante suas viagens."
+                    "Você destaca o potencial da IA para automatizar atividades, economizar tempo e transformar o trabalho."
             }
         ]
     },
 
     {
-        enunciado: "Qual destino seria ideal para suas próximas férias?",
+        enunciado: "Qual desafio merece mais atenção no futuro da inteligência artificial?",
         alternativas: [
             {
-                texto: "Montanhas, florestas, rios ou praias.",
+                texto: "Privacidade, segurança e proteção dos dados das pessoas.",
                 afirmacao:
-                    "Seu perfil combina com destinos tranquilos, paisagens naturais e momentos de conexão com a natureza."
+                    "Você considera a proteção de dados e a privacidade questões importantes para o desenvolvimento da inteligência artificial."
             },
             {
-                texto: "Um destino com desafios e muita exploração.",
+                texto: "Preparar as pessoas para as mudanças no mercado de trabalho.",
                 afirmacao:
-                    "Seu perfil combina com destinos movimentados, atividades emocionantes e novas experiências."
+                    "Você considera importante preparar a sociedade para as transformações profissionais provocadas pelo avanço da inteligência artificial."
             }
         ]
     }
@@ -55,7 +57,13 @@ const perguntas = [
 let perguntaAtual = 0;
 let resultadoFinal = "";
 
+
+/* ========================================
+   MOSTRAR PERGUNTA
+======================================== */
+
 function mostrarPergunta() {
+
     if (perguntaAtual >= perguntas.length) {
         mostrarResultado();
         return;
@@ -64,9 +72,13 @@ function mostrarPergunta() {
     const pergunta = perguntas[perguntaAtual];
 
     caixaPerguntas.textContent = pergunta.enunciado;
+
     caixaAlternativas.innerHTML = "";
 
+    atualizarProgresso();
+
     pergunta.alternativas.forEach((alternativa) => {
+
         const botao = document.createElement("button");
 
         botao.textContent = alternativa.texto;
@@ -79,7 +91,13 @@ function mostrarPergunta() {
     });
 }
 
+
+/* ========================================
+   SELECIONAR RESPOSTA
+======================================== */
+
 function selecionarResposta(alternativa) {
+
     resultadoFinal += alternativa.afirmacao + " ";
 
     perguntaAtual++;
@@ -87,12 +105,42 @@ function selecionarResposta(alternativa) {
     mostrarPergunta();
 }
 
-function mostrarResultado() {
-    caixaPerguntas.textContent = "Seu perfil de viajante";
 
-    textoResultado.textContent = resultadoFinal;
+/* ========================================
+   ATUALIZAR PROGRESSO
+======================================== */
+
+function atualizarProgresso() {
+
+    const progresso =
+        ((perguntaAtual + 1) / perguntas.length) * 100;
+
+    barraProgresso.style.width = `${progresso}%`;
+}
+
+
+/* ========================================
+   MOSTRAR RESULTADO
+======================================== */
+
+function mostrarResultado() {
+
+    caixaPerguntas.textContent =
+        "O que suas escolhas revelam?";
+
+    textoResultado.textContent =
+        resultadoFinal;
 
     caixaAlternativas.innerHTML = "";
+
+    caixaResultado.style.display = "block";
+
+    barraProgresso.style.width = "100%";
 }
+
+
+/* ========================================
+   INICIAR QUIZ
+======================================== */
 
 mostrarPergunta();
