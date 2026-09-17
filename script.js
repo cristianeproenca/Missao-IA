@@ -1,7 +1,5 @@
-const caixaPrincipal = document.querySelector(".caixa-principal");
 const caixaPerguntas = document.querySelector(".caixa-perguntas");
 const caixaAlternativas = document.querySelector(".caixa-alternativas");
-const caixaResultado = document.querySelector(".caixa-resultado");
 const textoResultado = document.querySelector(".texto-resultado");
 
 const perguntas = [
@@ -9,12 +7,14 @@ const perguntas = [
         enunciado: "Qual estilo de viagem mais combina com você?",
         alternativas: [
             {
-                texto: "Explorar a natureza, conhecer paisagens naturais e aproveitar momentos de tranquilidade.",
-                afirmacao: "Você valoriza o contato com a natureza e prefere experiências tranquilas, aproveitando paisagens e ambientes naturais."
+                texto: "Explorar a natureza e conhecer paisagens naturais.",
+                afirmacao:
+                    "Você valoriza o contato com a natureza e prefere experiências tranquilas, cercadas por belas paisagens."
             },
             {
-                texto: "Explorar novos destinos e viver experiências emocionantes.",
-                afirmacao: "Você gosta de aventura, de conhecer novos lugares e de experimentar atividades diferentes durante suas viagens."
+                texto: "Explorar novos destinos e viver grandes aventuras.",
+                afirmacao:
+                    "Você gosta de aventura, de descobrir novos destinos e de viver experiências marcantes."
             }
         ]
     },
@@ -23,12 +23,14 @@ const perguntas = [
         enunciado: "Qual atividade você escolheria durante uma viagem?",
         alternativas: [
             {
-                texto: "Fazer uma trilha e conhecer belas paisagens naturais.",
-                afirmacao: "Você aprecia atividades ao ar livre e gosta de conhecer lugares cercados pela natureza."
+                texto: "Fazer trilhas e conhecer lugares naturais.",
+                afirmacao:
+                    "Você aprecia atividades ao ar livre e gosta de conhecer ambientes naturais."
             },
             {
-                texto: "Praticar esportes radicais e conhecer lugares diferentes.",
-                afirmacao: "Você busca experiências marcantes e demonstra interesse por atividades que proporcionam desafios e emoção."
+                texto: "Praticar esportes e atividades de aventura.",
+                afirmacao:
+                    "Você procura desafios, emoção e experiências diferentes durante suas viagens."
             }
         ]
     },
@@ -37,65 +39,60 @@ const perguntas = [
         enunciado: "Qual destino seria ideal para suas próximas férias?",
         alternativas: [
             {
-                texto: "Um lugar cercado por montanhas, florestas, rios ou praias.",
-                afirmacao: "Seu perfil de viajante está relacionado à tranquilidade, à natureza e à descoberta de paisagens naturais."
+                texto: "Montanhas, florestas, rios ou praias.",
+                afirmacao:
+                    "Seu perfil combina com destinos tranquilos, paisagens naturais e momentos de conexão com a natureza."
             },
             {
-                texto: "Um destino com atividades de aventura e muitas opções de exploração.",
-                afirmacao: "Seu perfil de viajante está relacionado à aventura, à exploração e à busca por novas experiências."
+                texto: "Um destino com desafios e muita exploração.",
+                afirmacao:
+                    "Seu perfil combina com destinos movimentados, atividades emocionantes e novas experiências."
             }
         ]
     }
 ];
 
-let atual = 0;
-let perguntaAtual;
-let historiaFinal = "";
+let perguntaAtual = 0;
+let resultadoFinal = "";
 
-function mostraPergunta() {
-    if (atual >= perguntas.length) {
-        mostraResultado();
+function mostrarPergunta() {
+    if (perguntaAtual >= perguntas.length) {
+        mostrarResultado();
         return;
     }
 
-    perguntaAtual = perguntas[atual];
+    const pergunta = perguntas[perguntaAtual];
 
-    caixaPerguntas.textContent = perguntaAtual.enunciado;
-    caixaAlternativas.textContent = "";
+    caixaPerguntas.textContent = pergunta.enunciado;
+    caixaAlternativas.innerHTML = "";
 
-    mostraAlternativas();
-}
+    pergunta.alternativas.forEach((alternativa) => {
+        const botao = document.createElement("button");
 
-function mostraAlternativas() {
-    for (const alternativa of perguntaAtual.alternativas) {
-        const botaoAlternativas = document.createElement("button");
+        botao.textContent = alternativa.texto;
 
-        botaoAlternativas.textContent = alternativa.texto;
-
-        botaoAlternativas.addEventListener("click", () => {
-            respostaSelecionada(alternativa);
+        botao.addEventListener("click", () => {
+            selecionarResposta(alternativa);
         });
 
-        caixaAlternativas.appendChild(botaoAlternativas);
-    }
+        caixaAlternativas.appendChild(botao);
+    });
 }
 
-function respostaSelecionada(opcaoSelecionada) {
-    const afirmacao = opcaoSelecionada.afirmacao;
+function selecionarResposta(alternativa) {
+    resultadoFinal += alternativa.afirmacao + " ";
 
-    historiaFinal += afirmacao + " ";
+    perguntaAtual++;
 
-    atual++;
-
-    mostraPergunta();
+    mostrarPergunta();
 }
 
-function mostraResultado() {
-    caixaPerguntas.textContent = "Descubra o seu perfil de viajante:";
+function mostrarResultado() {
+    caixaPerguntas.textContent = "Seu perfil de viajante";
 
-    textoResultado.textContent = historiaFinal;
+    textoResultado.textContent = resultadoFinal;
 
-    caixaAlternativas.textContent = "";
+    caixaAlternativas.innerHTML = "";
 }
 
-mostraPergunta();
+mostrarPergunta();
