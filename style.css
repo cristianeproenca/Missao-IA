@@ -1,7 +1,24 @@
+/* ================================
+   CONFIGURAÇÕES GERAIS
+================================ */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+:root {
+    --verde-esmeralda: #087f5b;
+    --verde-escuro: #064b3c;
+    --verde-claro: #19a974;
+
+    --carmim: #a4133c;
+    --carmim-claro: #c9184a;
+
+    --branco: #ffffff;
+    --cinza-claro: #f4f7f5;
+    --texto: #17352d;
 }
 
 body {
@@ -11,115 +28,139 @@ body {
     align-items: center;
     justify-content: center;
 
+    padding: 30px;
+
     font-family: "Segoe UI", Arial, sans-serif;
 
     background:
         linear-gradient(
-            rgba(4, 30, 25, 0.72),
-            rgba(4, 30, 25, 0.72)
-        ),
-        url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=2000&q=80");
+            135deg,
+            rgba(6, 75, 60, 0.96),
+            rgba(8, 127, 91, 0.88),
+            rgba(164, 19, 60, 0.85)
+        );
 
-    background-size: cover;
-    background-position: center;
-
-    color: #ffffff;
+    color: var(--texto);
 }
 
+
+/* ================================
+   CONTAINER PRINCIPAL
+================================ */
+
 .caixa-principal {
-    width: min(90%, 720px);
+    position: relative;
 
-    padding: 45px;
+    width: min(92%, 760px);
 
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(18px);
+    padding: 50px;
 
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.97);
 
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+    border-radius: 28px;
+
+    border: 2px solid rgba(8, 127, 91, 0.2);
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.30),
+        0 0 0 8px rgba(255, 255, 255, 0.08);
+
+    overflow: hidden;
 
     text-align: center;
 }
 
-.caixa-principal::before {
-    content: "✈";
-    display: block;
 
-    font-size: 42px;
-    margin-bottom: 12px;
+/* Detalhe decorativo superior */
+
+.caixa-principal::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 7px;
+
+    background: linear-gradient(
+        90deg,
+        var(--verde-esmeralda),
+        var(--carmim),
+        var(--verde-esmeralda)
+    );
 }
+
+
+/* ================================
+   ÍCONE DE VIAGEM
+================================ */
+
+.caixa-principal::after {
+    content: "✈";
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 72px;
+    height: 72px;
+
+    margin: 0 auto 22px;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        var(--verde-esmeralda),
+        var(--verde-claro)
+    );
+
+    color: var(--branco);
+
+    font-size: 32px;
+
+    box-shadow:
+        0 10px 25px rgba(8, 127, 91, 0.30);
+}
+
+
+/* ================================
+   PERGUNTAS
+================================ */
 
 .caixa-perguntas {
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 1.3;
+    margin-bottom: 32px;
 
-    margin-bottom: 30px;
+    color: var(--verde-escuro);
+
+    font-size: 29px;
+    font-weight: 700;
+
+    line-height: 1.35;
 }
+
+
+/* ================================
+   ALTERNATIVAS
+================================ */
 
 .caixa-alternativas {
     display: flex;
+
     flex-direction: column;
-    gap: 15px;
+
+    gap: 16px;
 }
+
+
+/* Botões */
 
 .caixa-alternativas button {
     width: 100%;
 
-    padding: 17px 20px;
+    padding: 18px 22px;
 
-    border: none;
-    border-radius: 14px;
-
-    background: rgba(255, 255, 255, 0.94);
-    color: #173d35;
-
-    font-size: 16px;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.caixa-alternativas button:hover {
-    transform: translateY(-3px);
-
-    background: #dff5e8;
-
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.caixa-alternativas button:active {
-    transform: scale(0.98);
-}
-
-.caixa-resultado {
-    margin-top: 30px;
-}
-
-.texto-resultado {
-    font-size: 18px;
-    line-height: 1.7;
-
-    color: #f4fff8;
-}
-
-@media (max-width: 600px) {
-    .caixa-principal {
-        padding: 30px 20px;
-    }
-
-    .caixa-perguntas {
-        font-size: 22px;
-    }
-
-    .caixa-alternativas button {
-        font-size: 15px;
-        padding: 15px;
-    }
-}
+    border: 2px solid #dce9e4
