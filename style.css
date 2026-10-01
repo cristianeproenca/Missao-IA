@@ -34,3 +34,9 @@ button:hover {
   background-color: var(--cor-destaque);
   color: var(--cor-secundaria);
 }
+.caixa-resultado{
+    display: none;
+}
+.caixa-resultado.mostrar{
+    display: block;
+}
