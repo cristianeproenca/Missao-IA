@@ -47,7 +47,6 @@ function mostraResultado(){
 caixaResultado.classList.add("mostrar");
  botaoJogarNovamente.addEventListener("click", jogaNovamente());
 }
-}
 function jogaNovamente(){
     atual = 0;
     historiaFinal = "";
