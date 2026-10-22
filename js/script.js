@@ -1,13 +1,13 @@
 
-import { aleatorio } from './aleatorio.js';
-import { perguntas } from './perguntas.js';
+import { aleatorio } from "./aleatorio.js";
+import { perguntas } from "./perguntas.js";
 
 const caixaPrincipal = document.querySelector(".caixa-principal");
 const caixaPerguntas = document.querySelector(".caixa-perguntas");
 const caixaAlternativas = document.querySelector(".caixa-alternativas");
 const caixaResultado = document.querySelector(".caixa-resultado");
 const textoResultado = document.querySelector(".texto-resultado");
-const botaoJogarNovamente = document.querySelector("#botao-jogar-novamente");
+const botaoJogarNovamente = document.querySelector(".novamente-btn");
 
 let atual = 0;
 let perguntaAtual;
@@ -20,7 +20,6 @@ function mostraPergunta() {
     }
 
     perguntaAtual = perguntas[atual];
-
     caixaPerguntas.textContent = perguntaAtual.enunciado;
     caixaAlternativas.textContent = "";
 
@@ -32,10 +31,9 @@ function mostraAlternativas() {
         const botaoAlternativas = document.createElement("button");
 
         botaoAlternativas.textContent = alternativa.texto;
-
-        botaoAlternativas.addEventListener("click", () => {
-            respostaSelecionada(alternativa);
-        });
+        botaoAlternativas.addEventListener("click", () =>
+            respostaSelecionada(alternativa)
+        );
 
         caixaAlternativas.appendChild(botaoAlternativas);
     }
@@ -54,21 +52,6 @@ function mostraResultado() {
     caixaPerguntas.textContent = "Olha só o que podemos afirmar sobre você...";
     textoResultado.textContent = historiaFinal;
     caixaAlternativas.textContent = "";
-
-    caixaResultado.classList.add("mostrar");
 }
-
-function jogaNovamente() {
-    atual = 0;
-    historiaFinal = "";
-
-    caixaResultado.classList.remove("mostrar");
-
-    textoResultado.textContent = "";
-
-    mostraPergunta();
-}
-
-botaoJogarNovamente.addEventListener("click", jogaNovamente);
 
 mostraPergunta();
