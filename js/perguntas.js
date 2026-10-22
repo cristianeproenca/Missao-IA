@@ -8,7 +8,7 @@ export const perguntas = [
                      "Você gosta de contribuir diretamente para a preservação das áreas verdes.",
                      "Você se preocupa em proteger os animais e a biodiversidade."
                 ]
-            },
+            }
             {
                 texto:  "Reduziria o uso de produtos descartáveis.",
                 afirmacao:[
@@ -29,7 +29,7 @@ export const perguntas = [
                          "Você se preocupa com a conservação dos ambientes naturais.",
                          "Você valoriza a preservação dos recursos naturais para as futuras gerações."
                         ]
-                },
+                }
                 {
                     texto:  "Evitando desperdícios de água e energia.",
                     afirmacao: [
@@ -39,7 +39,7 @@ export const perguntas = [
                 }    
                
             ]
-        },
+        }
         {
             enunciado: "Qual dessas atitudes você teria em um passeio na natureza?",
 
@@ -59,5 +59,5 @@ export const perguntas = [
                 }    
                
             ]
-        },
-].,
+        }
+]
